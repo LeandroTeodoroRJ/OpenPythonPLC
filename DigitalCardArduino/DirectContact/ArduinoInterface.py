@@ -22,10 +22,17 @@
  *
 '''
 
+#General Definitions
+WAKEUP_DELAY = 0.4
+BOOT_DELAY = 1
+DELAY_BETWEEN_COMMANDS = 0.1
+DELAY_BEFORE_READ = 0.01
+
+
 class DigitalCard:
     def __init__(self, serial_comm):
-        self.input_status = 0
-        self.output_status = 0
+        self.input_status = 0x00
+        self.output_status = 0x09
         self.ser = serial_comm
         time.sleep(0.1)
 
@@ -33,6 +40,16 @@ class DigitalCard:
         return self.input_status, self.output_status
 
     def serial_loop_update(self):
+        #Updatde Output
+        self.msg = "24"
+        self.msg = self.msg + f"{self.output_status: 03X}"
+        self.msg = self.msg.replace(" ", "")
+        self.msg = bytes(self.msg, "utf-8")
+        self.ser.write(self.msg)
+        time.sleep(DELAY_BETWEEN_COMMANDS)	#Be carefull with to fast time delay
+        #Update status
+        self.ser.write(b'23')
+        time.sleep(DELAY_BEFORE_READ)
         self.receiver = self.ser.readlines()
 #        print(type(self.receiver))
 #        print(self.receiver)
@@ -42,18 +59,23 @@ class DigitalCard:
             partial1 = self.str_buffer_receiver[0:2]
             partial2 = self.str_buffer_receiver[2:4]
             self.input_status = int(partial1)
-            self.output_status = int(partial2)
-            self.ser.write(b'23')
-            time.sleep(0.01)
+            #TODO: Analize if is important create a feedback 
+            #output loop error monitoring.
+#           self.error_output_status = int(partial2)
         else:
             #TODO: Implement usart fail receiver log
             print("READ USART FAIL")
-
 
     def send_message(self, cmd):
         self.out = bytes(cmd, "utf-8")
         self.ser.write(self.out)
 
+    def set_output_status(self, level, bit_number):
+        if (level == 1):
+            self.output_status = self.output_status | (1 << bit_number)
+        else:
+            self.mask = ~(1 << bit_number)
+            self.output_status = self.output_status & self.mask
 
     @staticmethod
     def bit_is_active(byte_name, bit_number):
@@ -69,11 +91,11 @@ import serial
 import time
 import os
 
-time.sleep(0.4)
+time.sleep(WAKEUP_DELAY)
 
 #Dissable DTR line to not reset arduino
 os.system("stty -F /dev/ttyUSB0 -hupcl")
-time.sleep(1)
+time.sleep(BOOT_DELAY)
 
 ser = serial.Serial('/dev/ttyUSB0',
 115200,
@@ -85,25 +107,8 @@ bytesize=serial.EIGHTBITS
 
 dg_card1 = DigitalCard(ser)
 
-#Concatenate string dataframe
-param1 = 0x24
-param2 = 0x09
-msg = f"{param1: 03X}" + f"{param2: 03X}"
-msg = msg.replace(" ", "")
-
-print("Str message to send: " + msg)
-
-dg_card1.send_message(msg)
-
-#Delay between tramitter-receiver mode
-time.sleep(1)	#Be carefull with to fast time delay
-
 #Read input and outputs status
-
-msg = "23"
-dg_card1.send_message(msg)
-
-time.sleep(0.03)
+time.sleep(DELAY_BEFORE_READ)
 while True:
     dg_card1.serial_loop_update()
     input_info, output_info = dg_card1.get_status()
@@ -113,8 +118,11 @@ while True:
     print(output_info)
     if (DigitalCard.bit_is_active(input_info, 0) == True):
         print("Button Pressed")
+        dg_card1.set_output_status(True, 0)
     else:
         print("Button Not Pressed")
+        dg_card1.set_output_status(False, 0)
+
 
 ser.close()
 
