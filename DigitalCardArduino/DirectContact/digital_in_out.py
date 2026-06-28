@@ -4,7 +4,7 @@
  * Version: 1.0.0
  * Last Uptate: 21.06.26
  * Dependences:
- *
+ *      --ArduinoInterface V1.0.0
  * Current: Yes
  * Maintainer: leandroteodoro.engenharia@gmail.com
  * Architecture: X64
@@ -20,11 +20,11 @@
  *
 '''
 
-from x64interface import X64Interface
+from HardwareResources.ArduinoInterface import DigitalCard
 
 class DigitalPin:
     def __init__(self):
-        self.state = 0;
+        self.state = 0
 
     def get_state(self):
         return self.state
@@ -33,16 +33,20 @@ class DigitalPin:
         pass
 
 class DigitalInput(DigitalPin):
-    def update(self, file_path):
-        self.file = X64Interface()
-        self.file.set_path(file_path)
-        self.state, self.error = self.file.read_bol()
+    def update(self, dg_card, pin):
+        self.input, self.output = dg_card.get_status()
+        if (DigitalCard.bit_is_active(self.input, pin) == True):
+            self.state = 1
+        else:
+            self.state = 0
 
 class Coil(DigitalPin):
     def set_state(self, value):
         self.state = value
 
-    def update(self, file_path):
-        self.file = X64Interface()
-        self.file.set_path(file_path)
-        self.error = self.file.write_bol(self.state)
+    def update(self, dg_card, pin):
+        if (self.state == True):
+            dg_card.set_output_status(1, pin)
+        else:
+            dg_card.set_output_status(0, pin)
+

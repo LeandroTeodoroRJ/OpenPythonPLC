@@ -22,6 +22,9 @@
  *
 '''
 
+import time
+
+
 #General Definitions
 WAKEUP_DELAY = 0.4
 BOOT_DELAY = 1
@@ -32,9 +35,9 @@ DELAY_BEFORE_READ = 0.01
 class DigitalCard:
     def __init__(self, serial_comm):
         self.input_status = 0x00
-        self.output_status = 0x09
+        self.output_status = 0x00
         self.ser = serial_comm
-        time.sleep(0.1)
+#        time.sleep(0.1)
 
     def get_status(self):
         return self.input_status, self.output_status
@@ -85,7 +88,7 @@ class DigitalCard:
             return False
 
 
-
+'''
 #Test Class Start
 import serial
 import time
@@ -125,5 +128,5 @@ while True:
 
 
 ser.close()
-
+'''
 
