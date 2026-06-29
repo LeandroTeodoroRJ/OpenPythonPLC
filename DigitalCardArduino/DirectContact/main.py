@@ -35,7 +35,7 @@ time.sleep(BOOT_DELAY)
 
 ser = serial.Serial('/dev/ttyUSB0',
 115200,
-timeout=0.05,
+timeout=SERIAL_TIMEOUT,
 parity=serial.PARITY_NONE,
 stopbits=serial.STOPBITS_ONE,
 bytesize=serial.EIGHTBITS
