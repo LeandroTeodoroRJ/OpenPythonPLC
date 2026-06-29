@@ -1,10 +1,10 @@
 '''
  * Description: It implements direct line contact with PLC example
  * Stable: Yes
- * Version: 1.0.0
+ * Version: 1.0.1
  * Last Uptate: 28.06.26
  * Dependences:
- *  -- digital_in_out v1.0.0
+s *  -- digital_in_out v1.0.0
  *  -- x64interface v1.0.0
  * Current: Yes
  * Maintainer: leandroteodoro.engenharia@gmail.com
@@ -57,4 +57,4 @@ while True:
     dg_card1.serial_loop_update()
     X1.update(dg_card1, 0)
     direct_contact()
-    time.sleep(0.03)  # scan time
+#    time.sleep(0.03)  # scan time - disable global scan time

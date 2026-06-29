@@ -1,7 +1,7 @@
 '''
  * Description: It implements serial communication with Arduino Digital Card
  * Stable: Yes
- * Version: 1.0.0
+ * Version: 1.0.1
  * Last Uptate: 21.06.26
  * Dependences:
  *
@@ -17,7 +17,7 @@
  * Documents: No
  * Links:
  * Comments:
- *  -- Use Arduino Firmware V1.1.0: 
+ *  -- Use Arduino Firmware V1.1.1:
  *     https://github.com/LeandroTeodoroRJ/BareMetalLowCost_Arduino/tree/main/Serial_TTY
  *
 '''
@@ -28,9 +28,9 @@ import time
 #General Definitions
 WAKEUP_DELAY = 0.4
 BOOT_DELAY = 1
-DELAY_BETWEEN_COMMANDS = 0.075
+DELAY_BETWEEN_COMMANDS = 0.020
 DELAY_BEFORE_READ = 0.01
-SERIAL_TIMEOUT = 0.05
+SERIAL_TIMEOUT = 0.015
 
 
 class DigitalCard:
