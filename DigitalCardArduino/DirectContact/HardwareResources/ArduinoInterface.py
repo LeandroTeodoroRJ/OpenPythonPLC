@@ -37,7 +37,6 @@ class DigitalCard:
         self.input_status = 0x00
         self.output_status = 0x00
         self.ser = serial_comm
-#        time.sleep(0.1)
 
     def get_status(self):
         return self.input_status, self.output_status

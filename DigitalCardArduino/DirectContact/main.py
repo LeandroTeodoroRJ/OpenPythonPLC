@@ -8,10 +8,10 @@
  *  -- x64interface v1.0.0
  * Current: Yes
  * Maintainer: leandroteodoro.engenharia@gmail.com
- * Architecture: X64
+ * Architecture: RaspberryPi Model 3 B+
  * Compile/Interpreter: python3 v3.10.12
  * Programer: No
- * Operational System: Ubuntu Mint 22.04
+ * Operational System: Raspbian GNU V10
  * Access: Public
  * Changelog: No
  * Readme and
