@@ -1,5 +1,5 @@
 '''
- * Description: It implements input pulse button test
+ * Description: Conter Up and Down example
  * Stable: Yes
  * Version: 1.0.0
  * Last Uptate: 03.07.26
@@ -47,15 +47,21 @@ dg_card1 = DigitalCard(ser)
 X1 = InputPulseUp()
 Y1 = Coil()
 C1 = CounterUp()
-C1.set_target(10)
+C1.set_target(5)
+#C1 = CounterDown()
+#C1.set_counter(7)
 
 def implement_action():
     C1.step()
+    print(C1.get_counter())
     X1.finished_action()
 
 def counter_finished():
     Y1.set_state(1)
     Y1.update(dg_card1, 0)
+    C1.reset_counter()
+#    C1.set_counter(7)
+
 
 while True:
     dg_card1.serial_loop_update()
