@@ -10,7 +10,7 @@
  * Architecture: X64
  * Compile/Interpreter: python3 v3.7.3
  * Programer: No
- * Operational System: Raspbian
+ * Operational System: Raspbian GNU V10
  * Access: Public
  * Changelog: No
  * Readme and

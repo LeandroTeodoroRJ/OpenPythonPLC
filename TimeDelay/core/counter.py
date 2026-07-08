@@ -3,14 +3,13 @@
  * Stable: Yes
  * Version: 1.0.0
  * Last Uptate: 02.07.26
- * Dependences:
- *      --ArduinoInterface V1.0.0
+ * Dependences: No
  * Current: Yes
  * Maintainer: leandroteodoro.engenharia@gmail.com
  * Architecture: X64
- * Compile/Interpreter: python3 v3.10.12
+ * Compile/Interpreter: python3 v3.7.3
  * Programer: No
- * Operational System: Ubuntu Mint 22.04
+ * Operational System: Raspbian GNU V10
  * Access: Public
  * Changelog: No
  * Readme and

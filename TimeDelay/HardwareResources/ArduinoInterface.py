@@ -4,13 +4,13 @@
  * Version: 1.0.1
  * Last Uptate: 21.06.26
  * Dependences:
- *
+ *  -- time
  * Current: Yes
  * Maintainer: leandroteodoro.engenharia@gmail.com
- * Architecture: X64
- * Compile/Interpreter: python3 v3.10.12
+ * Architecture: ARM
+ * Compile/Interpreter: python3 v3.7.3
  * Programer: No
- * Operational System: Ubuntu Mint 22.04
+ * Operational System: Raspbian GNU V10
  * Access: Public
  * Changelog: No
  * Readme and

@@ -9,7 +9,7 @@
  * Current: Yes
  * Maintainer: leandroteodoro.engenharia@gmail.com
  * Architecture: RaspberryPi Model 3 B+
- * Compile/Interpreter: python3 v3.10.12
+ * Compile/Interpreter: python3 v3.7
  * Programer: No
  * Operational System: Raspbian GNU V10
  * Access: Public
