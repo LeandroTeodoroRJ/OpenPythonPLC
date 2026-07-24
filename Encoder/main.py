@@ -1,5 +1,5 @@
 '''
- * Description: Conter Up and Down example
+ * Description: How to use industrial encoder
  * Stable: Yes
  * Version: 1.0.0
  * Last Uptate: 03.07.26
@@ -23,8 +23,6 @@
 
 from HardwareResources.ArduinoInterface import *
 import serial
-#from core.digital_in_out import InputPulseUp, Coil
-#from core.counter import CounterUp, CounterDown
 from core.encoder import RotaryEncoder as re
 import time
 import os
@@ -44,36 +42,11 @@ bytesize=serial.EIGHTBITS
 )
 
 dg_card1 = DigitalCard(ser)
-
-#X1 = InputPulseUp()
-#Y1 = Coil()
-#C1 = CounterUp()
-#C1.set_target(5)
-#C1 = CounterDown()
-#C1.set_counter(7)
 encoder = re(dg_card1)
-
-'''
-def implement_action():
-    C1.step()
-    print(C1.get_counter())
-    X1.finished_action()
-
-def counter_finished():
-    Y1.set_state(1)
-    Y1.update(dg_card1, 0)
-    C1.reset_counter()
-#    C1.set_counter(7)
-'''
 
 while True:
     dg_card1.serial_loop_update()
     dg_card1.encoder_update()
     encoder.update()
-    print(encoder.count)
-#    X1.update(dg_card1, 0)
-#    if (X1.action() == 1):
-#        implement_action()
-#    if (C1.is_over() == 1):
-#        counter_finished()
+    print(encoder.get_position())
 #    time.sleep(0.03)  # scan time - disable global scan time

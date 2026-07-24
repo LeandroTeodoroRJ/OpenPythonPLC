@@ -24,6 +24,11 @@ class RotaryEncoder:
     def __init__(self, card):
         self.digi_card = card
         self.count = 0
+        self.absolute_position = 0
 
     def update(self):
         self.count = self.digi_card.get_encoder_value()
+        self.absolute_position = self.count - 32000
+
+    def get_position(self):
+        return self.absolute_position
