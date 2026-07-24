@@ -2,7 +2,7 @@
 Open source and open hardware PLC using Python program language.
 
 ## Features:
-(New)Encoder :: How to use industrial rotary encoder.
+(New)Encoder :: How to use industrial rotary encoder.  
 TimeDelay :: Example using delay with multithread mode.  
 Counter :: How to use the counter up and counter down.  
 InputPulse :: Implement the rise up and down buttons.  
