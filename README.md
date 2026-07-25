@@ -12,3 +12,4 @@ SealContact :: Frist Example Using Files.
 
 ### TODO
 * Log USART read fail
+* Calculate Encoder RPM

@@ -1,7 +1,7 @@
 '''
  * Description: It implements serial communication with Arduino Digital Card
  * Stable: Yes
- * Version: 1.1.0
+ * Version: 1.1.1
  * Last Uptate: 24.06.26
  * Dependences:
  *
@@ -38,7 +38,7 @@ class DigitalCard:
         self.input_status = 0x00
         self.output_status = 0x00
         self.ser = serial_comm
-        self.encoder_count = 0
+        self.encoder_count = 32000
 
     def get_status(self):
         return self.input_status, self.output_status

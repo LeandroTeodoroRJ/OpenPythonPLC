@@ -32,3 +32,5 @@ class RotaryEncoder:
 
     def get_position(self):
         return self.absolute_position
+
+    #TODO: Calculate encoder RPM
