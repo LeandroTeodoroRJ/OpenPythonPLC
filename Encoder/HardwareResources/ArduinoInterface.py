@@ -17,7 +17,7 @@
  * Documents: No
  * Links:
  * Comments:
- *  -- Use Arduino Firmware V1.1.1:
+ *  -- Use Arduino Firmware V2.1.0:
  *     https://github.com/LeandroTeodoroRJ/BareMetalLowCost_Arduino/tree/main/Serial_TTY
  *
 '''
