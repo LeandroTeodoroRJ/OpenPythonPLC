@@ -1,7 +1,7 @@
 '''
  * Description: How to use industrial encoder
  * Stable: Yes
- * Version: 1.0.0
+ * Version: 1.0.1
  * Last Uptate: 03.07.26
  * Dependences:
  *  -- digital_in_out v1.0.0
@@ -26,6 +26,9 @@ import serial
 from core.encoder import RotaryEncoder as re
 import time
 import os
+import _thread
+
+CARD_TIME_UPDATE = 0.1
 
 time.sleep(WAKEUP_DELAY)
 
@@ -44,9 +47,16 @@ bytesize=serial.EIGHTBITS
 dg_card1 = DigitalCard(ser)
 encoder = re(dg_card1)
 
+def card_update():
+    while True:
+        time.sleep(CARD_TIME_UPDATE)
+        dg_card1.serial_loop_update()
+        dg_card1.encoder_update()
+
+#Start thread to communication card update request
+_thread.start_new_thread(card_update, ())
+
 while True:
-    dg_card1.serial_loop_update()
-    dg_card1.encoder_update()
     encoder.update()
     print(encoder.get_position())
-#    time.sleep(0.03)  # scan time - disable global scan time
+    time.sleep(0.50)  # scan time - disable global scan time
