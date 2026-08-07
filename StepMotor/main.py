@@ -1,11 +1,11 @@
 '''
- * Description: How to use industrial encoder
+ * Description: How to use a step motor
  * Stable: Yes
- * Version: 1.0.1
- * Last Uptate: 03.07.26
+ * Version: 1.0.0
+ * Last Uptate: 07.08.26
  * Dependences:
- *  -- digital_in_out v1.0.0
- *  -- x64interface v1.0.0
+ *  -- motor v1.0.0
+ *  -- pySerial
  * Current: Yes
  * Maintainer: leandroteodoro.engenharia@gmail.com
  * Architecture: RaspberryPi Model 3 B+
@@ -23,11 +23,9 @@
 
 from HardwareResources.ArduinoInterface import *
 import serial
-from core.encoder import RotaryEncoder as re
 from core.motor import StepMotor
 import time
 import os
-import _thread
 
 CARD_TIME_UPDATE = 0.1
 
@@ -46,25 +44,17 @@ bytesize=serial.EIGHTBITS
 )
 
 dg_card1 = DigitalCard(ser)
-#encoder = re(dg_card1)
 smotor = StepMotor(dg_card1)
 
-'''
-def card_update():
-    while True:
-        time.sleep(CARD_TIME_UPDATE)
-        dg_card1.serial_loop_update()
-        dg_card1.encoder_update()
-
-#Start thread to communication card update request
-_thread.start_new_thread(card_update, ())
-'''
-
 while True:
-#    encoder.update()
-#    print(encoder.get_position())
-    smotor.update_position(400)
-    time.sleep(2)
-    smotor.update_position(-200)
+    smotor.update_position(100)
+    time.sleep(0.5)
+    smotor.update_position(100)
+    time.sleep(0.5)
+    smotor.update_position(100)
+    time.sleep(0.5)
+    smotor.update_position(100)
+    time.sleep(0.5)
+    smotor.update_position(-400)
     time.sleep(2)
 #    time.sleep(0.50)  # scan time - disable global scan time
